@@ -1,17 +1,11 @@
 #function that computes centroid
-from itertools import zip_longest
+import itertools
 def compute_centroid(*list_of_coords:list)->list:
     if len(list_of_coords) == 0:
-        return []
+        raise BaseException
 
-    centroid = []
-    for i,j in zip_longest(*list_of_coords, fillvalue=0):
-        number = i+j
-        centroid.append(number)
-
-    centroid = [x/len(list_of_coords) for x in centroid]
+    centroid = [sum(i)/len(i) for i in itertools.zip_longest(*list_of_coords, fillvalue=0)]
     return centroid
-
 
 #function execution begins
 print(''' ____ ___  __  __ ____  _   _ _____ _____    
