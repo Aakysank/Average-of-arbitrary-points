@@ -1,21 +1,13 @@
 #function that computes centroid
+from itertools import zip_longest
 def compute_centroid(*list_of_coords:list)->list:
-    if len(list_of_coords):
+    if len(list_of_coords) == 0:
         return []
-    
-    size_list = []
-    for i in range(len(list_of_coords)):
-        size_list.append(len(list_of_coords[i]))
 
-    max_size = max(*size_list)#finding the maximum size of the given list, first the length of each list is stored into another list and max function is called.
-    #filling zeros for max size
-    centroid = [0 for i in range(max_size)]
-
-    #computing average
-    for i in range(len(list_of_coords)):
-        for j in range(len(list_of_coords[i])):
-            centroid[j] += list_of_coords[i][j]
-
+    centroid = []
+    for i,j in zip_longest(*list_of_coords, fillvalue=0):
+        number = i+j
+        centroid.append(number)
 
     centroid = [x/len(list_of_coords) for x in centroid]
     return centroid
